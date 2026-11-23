@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CleanArchitecture.Domain.Abstractions;
+using CleanArchitecture.Domain.Users.Events;
 
 namespace CleanArchitecture.Domain.Users
 {
@@ -31,6 +32,7 @@ namespace CleanArchitecture.Domain.Users
         )
         {
             var user = new User(Guid.NewGuid(), nombre, apellido, email);
+            user.RaiseDomainEvent(new UserCreatedDomainEvent(user.Id));
             return user;
         }
     }
